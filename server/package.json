@@ -21,25 +21,25 @@
     "@types/express": "^5.0.0",
     "@types/express-fileupload": "^1.5.1",
     "@types/jsonwebtoken": "^9.0.7",
-    "@types/node": "^22.10.2",
-    "@types/nodemailer": "^6.4.17",
+    "@types/node": "^24.10.1",
+    "@types/nodemailer": "^7.0.4",
     "ts-node-dev": "^2.0.0",
     "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.717.0",
     "@prisma/client": "^6.3.1",
     "axios": "^1.7.9",
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
     "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^6.9.16",
+    "nodemailer": "^7.0.11",
     "prisma": "^6.1.0",
     "zod": "^3.24.1"
   }
