@@ -9,7 +9,7 @@ export default function AdminLayout() {
       <AppSidebar variant="sidebar" />
       <SidebarInset>
         <AdminHeader />
-        <div className="p-4 pmd:p-6 h-full overflow-auto bg-muted">
+        <div className="h-full overflow-auto bg-muted/40 p-3 md:p-4">
           <Outlet />
         </div>
       </SidebarInset>

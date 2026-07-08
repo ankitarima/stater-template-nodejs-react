@@ -32,6 +32,8 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
   const user_data = await db.adminUser.findFirst({
     omit: {
       password: true,
+      reset_token: true,
+      reset_token_expiry: true,
     },
     where: { id: new_user.id },
   });
@@ -48,7 +50,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
     res,
     200,
     true,
-    { access_token, refresh_token },
+    { user: user_data, access_token, refresh_token },
     "User registered successfully"
   );
 });

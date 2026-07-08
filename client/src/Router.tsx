@@ -1,6 +1,7 @@
 import { ReactNode, Suspense } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import Login from "./components/auth/login";
+import Register from "./components/auth/register";
 import AuthLayout from "./components/layout/auth-layout";
 import ForgetPassword from "./components/auth/forgot-password";
 import PasswordReset from "./components/auth/password-reset";
@@ -28,6 +29,14 @@ export const Router = () => {
             element={
               <AuthLayout>
                 <Login />
+              </AuthLayout>
+            }
+          />
+          <Route
+            path="/auth/register"
+            element={
+              <AuthLayout>
+                <Register />
               </AuthLayout>
             }
           />

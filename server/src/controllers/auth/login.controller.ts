@@ -36,6 +36,8 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
   const user_data = await db.adminUser.findFirst({
     omit: {
       password: true,
+      reset_token: true,
+      reset_token_expiry: true,
     },
     where: { id: user.id },
   });

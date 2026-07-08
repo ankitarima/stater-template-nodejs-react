@@ -1,415 +1,310 @@
 import {
   Github,
-  Code,
+  Code2,
   Package,
   Zap,
-  Shield,
-  Sparkles,
+  ShieldCheck,
+  Moon,
+  GitBranch,
   Download,
+  ArrowRight,
+  Check,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-export default function LandingPage() {
-  return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
-      <section className="py-20 md:py-48">
-        <div className="container mx-auto px-4 text-center">
-          <div className="inline-block rounded-full bg-gray-800/50 px-3 py-1 text-sm font-medium text-[#1D325C] mb-6">
-            v1.0.0 Released
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#1D325C] to-purple-400 bg-clip-text text-transparent">
-            React+Node TypeScript Starter Template
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10">
-            A modern, opinionated starter template for building scalable React
-            applications with Node.js backend, TypeScript, and best practices
-            included out of the box.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-20">
-            <Link to="#get-started">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto gap-2 bg-[#1D325C] hover:bg-[#1D325C]/90 text-white"
-              >
-                <Download className="h-5 w-5" />
-                Get Started
-              </Button>
-            </Link>
-            <Link
-              to="https://github.com/ankitarima/stater-template-nodejs-react"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto gap-2 text-accent-foreground"
-              >
-                <Github className="h-5 w-5" />
-                View on GitHub
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+import { Button } from "@/components/ui/button";
 
-      <section className="py-16 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto rounded-lg overflow-hidden border border-gray-800">
-            <div className="bg-gray-900 px-4 py-2 flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500"></div>
-              <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
-              <div className="h-3 w-3 rounded-full bg-green-500"></div>
-              <span className="text-gray-400 text-sm ml-2">App.tsx</span>
-            </div>
-            <pre className="bg-gray-950 p-4 overflow-x-auto text-sm">
-              <code className="text-gray-300">
-                {`import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "@/components/ui/toaster.tsx";
+const REPO_URL = "https://github.com/ankitarima/stater-template-nodejs-react";
+
+const FEATURES = [
+  {
+    icon: Zap,
+    title: "TypeScript First",
+    description:
+      "Strict TypeScript across client and server for type safety and a better DX.",
+  },
+  {
+    icon: Package,
+    title: "Modern Stack",
+    description:
+      "React 19, Vite, Tailwind v4, shadcn/ui, Express 5 and Prisma pre-wired.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Auth Ready",
+    description:
+      "JWT auth with login and registration flows and protected admin routes.",
+  },
+  {
+    icon: Moon,
+    title: "Dark Mode",
+    description:
+      "System-aware theming with a token-driven design system out of the box.",
+  },
+  {
+    icon: Code2,
+    title: "Best Practices",
+    description:
+      "Opinionated folder structure, ESLint, and reusable component patterns.",
+  },
+  {
+    icon: GitBranch,
+    title: "CI/CD Ready",
+    description:
+      "GitHub Actions workflows for continuous integration and deployment.",
+  },
+];
+
+const PRODUCTIVITY = [
+  "Pre-configured build tools",
+  "Component library structure",
+  "Routing & state patterns",
+  "Enterprise UI system",
+];
+
+const PRACTICES = [
+  "Strict TypeScript config",
+  "Accessible components",
+  "Performance optimizations",
+  "Consistent theming",
+];
+
+const STEPS = [
+  { label: "Clone the repository", code: `git clone ${REPO_URL}.git` },
+  { label: "Install dependencies", code: "cd client && npm install" },
+  { label: "Start the dev server", code: "npm run dev" },
+];
+
+const APP_SNIPPET = `import { ThemeProvider } from "@/components/theme-provider";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { Router } from "@/Router";
-
-// @tanstack/react-query
-export const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router />
-      <Toaster />
-      <ReactQueryDevtools initialIsOpen={false} position="bottom" />
-    </QueryClientProvider>
+    <ThemeProvider attribute="class" defaultTheme="system">
+      <QueryClientProvider client={queryClient}>
+        <Router />
+      </QueryClientProvider>
+    </ThemeProvider>
   );
-}
-`}
-              </code>
+}`;
+
+export default function LandingPage() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-border/60">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at center, var(--primary) 1px, transparent 1px)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+        <div className="mx-auto max-w-screen-xl px-4 pb-16 pt-28 text-center md:pb-24 md:pt-36">
+          <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            v1.0.0 — React 19 · Tailwind v4 · Express 5
+          </div>
+          <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
+            The enterprise React + Node{" "}
+            <span className="text-primary">TypeScript</span> starter
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground md:text-lg">
+            A modern, opinionated foundation for building scalable applications
+            with a Node.js backend, TypeScript, and a compact enterprise UI
+            system baked in.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg" className="gap-2">
+              <Link to="#get-started">
+                <Download className="h-4 w-4" />
+                Get Started
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="gap-2">
+              <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4" />
+                View on GitHub
+              </a>
+            </Button>
+          </div>
+
+          {/* Code preview */}
+          <div className="mx-auto mt-14 max-w-2xl overflow-hidden rounded-lg border border-border bg-card text-left shadow-sm">
+            <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-4 py-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-chart-4/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-chart-2/70" />
+              <span className="ml-2 text-xs text-muted-foreground">App.tsx</span>
+            </div>
+            <pre className="overflow-x-auto p-4 text-xs leading-relaxed">
+              <code className="text-muted-foreground">{APP_SNIPPET}</code>
             </pre>
           </div>
         </div>
       </section>
 
-      <section id="features" className="py-20 md:py-28">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Packed with Essential Features
+      {/* Features */}
+      <section id="features" className="border-b border-border/60 py-16 md:py-20">
+        <div className="mx-auto max-w-screen-xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
+              Everything you need to ship
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Everything you need to build modern React applications, without
-              the configuration headaches
+            <p className="mt-3 text-muted-foreground">
+              Batteries included, without the configuration headaches.
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Zap className="h-6 w-6 text-[#1D325C]" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">TypeScript First</h3>
-              <p className="text-gray-400">
-                Built with TypeScript from the ground up for type safety and
-                better developer experience.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Package className="h-6 w-6 text-[#1D325C]" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Modern Stack</h3>
-              <p className="text-gray-400">
-                Includes React Router, Tailwind CSS, ESLint, and other essential
-                tools pre-configured.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-[#1D325C]" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">SEO Optimized</h3>
-              <p className="text-gray-400">
-                Built-in SEO components and server-side rendering support for
-                better search engine visibility.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Sparkles className="h-6 w-6 text-[#1D325C]" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Dark Mode Ready</h3>
-              <p className="text-gray-400">
-                Includes a theme context with dark/light mode toggle
-                functionality out of the box.
-              </p>
-            </div>
-
-            {/* Feature 5 */}
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Code className="h-6 w-6 text-[#1D325C]" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Best Practices</h3>
-              <p className="text-gray-400">
-                Follows React best practices with a well-organized folder
-                structure and component patterns.
-              </p>
-            </div>
-
-            {/* Feature 6 */}
-            <div className="bg-gray-900/50 p-6 rounded-lg border border-gray-800">
-              <div className="bg-primary/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Github className="h-6 w-6 text-[#1D325C]" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">CI/CD Ready</h3>
-              <p className="text-gray-400">
-                Includes GitHub Actions workflows for continuous integration and
-                deployment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Use Section */}
-      <section id="why-use" className="py-20 md:py-28 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why Use This Starter Template?
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Save time and avoid common pitfalls when starting a new React
-              project
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <div>
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <span className="text-[#1D325C]">01.</span> Productivity Boost
-              </h3>
-              <p className="text-gray-400 mb-4">
-                Skip the tedious setup process and jump straight into building
-                your application. Our template handles all the boilerplate code
-                so you can focus on what matters.
-              </p>
-              <ul className="space-y-2">
-                {[
-                  "Pre-configured build tools",
-                  "Component library structure",
-                  "Routing setup",
-                  "State management patterns",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <div className="mt-1 h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <div className="h-2 w-2 rounded-full bg-[#1D325C]"></div>
-                    </div>
-                    <span className="text-gray-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <span className="text-[#1D325C]">02.</span> Best Practices
-                Built-in
-              </h3>
-              <p className="text-gray-400 mb-4">
-                Avoid common mistakes and follow industry best practices from
-                day one. Our template is built with performance, accessibility,
-                and maintainability in mind.
-              </p>
-              <ul className="space-y-2">
-                {[
-                  "Strict TypeScript configuration",
-                  "Accessibility guidelines",
-                  "SEO optimization",
-                  "Performance optimizations",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <div className="mt-1 h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <div className="h-2 w-2 rounded-full bg-[#1D325C]"></div>
-                    </div>
-                    <span className="text-gray-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Open Source Section */}
-      <section id="opensource" className="py-20 md:py-28">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-block rounded-full bg-gray-800/50 px-3 py-1 text-sm font-medium text-[#1D325C] mb-6">
-              100% Open Source
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Free and Open Source
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              This template is completely free to use for both personal and
-              commercial projects under the MIT license
-            </p>
-          </div>
-
-          <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-8 max-w-3xl mx-auto">
-            <div className="flex items-start gap-6">
-              <Github className="h-12 w-12 text-[#1D325C] flex-shrink-0" />
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Community Driven</h3>
-                <p className="text-gray-400 mb-4">
-                  Join our growing community of developers. Contribute to the
-                  project, report issues, or suggest new features to make this
-                  template even better.
-                </p>
-                <div className="flex flex-wrap gap-3 mb-6">
-                  <div className="bg-gray-800/50 px-3 py-1 rounded-full text-sm">
-                    MIT License
-                  </div>
-                  <div className="bg-gray-800/50 px-3 py-1 rounded-full text-sm">
-                    Regular Updates
-                  </div>
-                  <div className="bg-gray-800/50 px-3 py-1 rounded-full text-sm">
-                    Community Support
-                  </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURES.map(({ icon: Icon, title, description }) => (
+              <div
+                key={title}
+                className="rounded-lg border border-border bg-card p-5 transition-colors hover:border-primary/40"
+              >
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
+                  <Icon className="h-4 w-4" />
                 </div>
-                <Link
-                  to="https://github.com/ankitarima/stater-template-nodejs-react"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    variant="outline"
-                    className="gap-2 text-accent-foreground"
-                  >
+                <h3 className="text-sm font-semibold">{title}</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground">
+                  {description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Use */}
+      <section id="why-use" className="border-b border-border/60 bg-muted/30 py-16 md:py-20">
+        <div className="mx-auto max-w-screen-xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
+              Why use this starter?
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Save time and avoid common pitfalls when starting a new project.
+            </p>
+          </div>
+          <div className="mx-auto mt-10 grid max-w-4xl gap-8 md:grid-cols-2">
+            {[
+              { n: "01", title: "Productivity boost", items: PRODUCTIVITY },
+              { n: "02", title: "Best practices built-in", items: PRACTICES },
+            ].map((col) => (
+              <div key={col.n} className="rounded-lg border border-border bg-card p-6">
+                <h3 className="flex items-center gap-2 text-lg font-semibold">
+                  <span className="text-primary">{col.n}.</span> {col.title}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
+                  {col.items.map((item) => (
+                    <li key={item} className="flex items-center gap-2.5 text-sm">
+                      <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Open Source */}
+      <section id="opensource" className="border-b border-border/60 py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-4">
+          <div className="rounded-lg border border-border bg-card p-6 md:p-8">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Github className="h-5 w-5" />
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold">Free & open source</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground">
+                  Completely free for personal and commercial projects under the
+                  MIT license. Contribute, report issues, or suggest features.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {["MIT License", "Regular Updates", "Community Support"].map(
+                    (tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-muted/50 px-2.5 py-0.5 text-xs text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    )
+                  )}
+                </div>
+                <Button asChild variant="outline" size="sm" className="mt-5 gap-2">
+                  <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
                     <Github className="h-4 w-4" />
                     Star on GitHub
-                  </Button>
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Get Started */}
+      <section id="get-started" className="border-b border-border/60 bg-muted/30 py-16 md:py-20">
+        <div className="mx-auto max-w-3xl px-4">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
+              Get started in seconds
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Clone the repository and start building right away.
+            </p>
+          </div>
+          <div className="mt-8 space-y-3">
+            {STEPS.map((step, i) => (
+              <div
+                key={step.label}
+                className="overflow-hidden rounded-lg border border-border bg-card"
+              >
+                <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-4 py-2 text-xs text-muted-foreground">
+                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary/15 text-[10px] font-semibold text-primary">
+                    {i + 1}
+                  </span>
+                  {step.label}
+                </div>
+                <pre className="overflow-x-auto px-4 py-3 text-xs">
+                  <code className="text-muted-foreground">{step.code}</code>
+                </pre>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-4">
+          <div className="rounded-xl border border-primary/20 bg-primary/5 p-8 text-center md:p-12">
+            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
+              Ready to build something great?
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+              Start your next project on a solid, enterprise-ready foundation.
+            </p>
+            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+              <Button asChild size="lg" className="gap-2">
+                <Link to="/auth/register">
+                  Create an account
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Get Started Section */}
-      <section id="get-started" className="py-20 md:py-28 bg-gray-900/50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Get Started in Seconds
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Clone the repository and start building your next React
-              application right away
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-gray-950 border border-gray-800 rounded-lg overflow-hidden mb-8">
-              <div className="bg-gray-900 px-4 py-2 flex items-center">
-                <span className="text-gray-400 text-sm">
-                  Clone the repository
-                </span>
-              </div>
-              <div className="p-4 overflow-x-auto">
-                <pre className="text-gray-300 text-sm">
-                  <code>
-                    git clone
-                    https://github.com/ankitarima/stater-template-nodejs-react.git
-                  </code>
-                </pre>
-              </div>
-            </div>
-
-            <div className="bg-gray-950 border border-gray-800 rounded-lg overflow-hidden mb-8">
-              <div className="bg-gray-900 px-4 py-2 flex items-center">
-                <span className="text-gray-400 text-sm">
-                  Install dependencies
-                </span>
-              </div>
-              <div className="p-4 overflow-x-auto">
-                <pre className="text-gray-300 text-sm">
-                  <code>cd my-app && npm install</code>
-                </pre>
-              </div>
-            </div>
-
-            <div className="bg-gray-950 border border-gray-800 rounded-lg overflow-hidden mb-8">
-              <div className="bg-gray-900 px-4 py-2 flex items-center">
-                <span className="text-gray-400 text-sm">
-                  Start the development server
-                </span>
-              </div>
-              <div className="p-4 overflow-x-auto">
-                <pre className="text-gray-300 text-sm">
-                  <code>npm run dev</code>
-                </pre>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <p className="text-gray-400 mb-6">
-                Or download the template directly and extract it to your project
-                folder
-              </p>
-              <Link
-                to="https://github.com/ankitarima/stater-template-nodejs-react"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="lg" className="gap-2">
-                  <Download className="h-5 w-5" />
-                  Download ZIP
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-primary/20 to-purple-900/20 border border-primary/20 rounded-lg p-8 md:p-12 text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Build Something Amazing?
-            </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Start your next project with our React TypeScript starter template
-              and focus on what matters - building great features.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="https://github.com/ankitarima/stater-template-nodejs-react"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="lg" className="w-full sm:w-auto gap-2">
-                  <Github className="h-5 w-5" />
+              </Button>
+              <Button asChild variant="outline" size="lg" className="gap-2">
+                <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
+                  <Github className="h-4 w-4" />
                   View on GitHub
-                </Button>
-              </Link>
-              <Link to="#get-started">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto gap-2 text-accent-foreground bg-[#1D325C] hover:bg-[#1D325C]/90 text-white "
-                >
-                  <Download className="h-5 w-5" />
-                  Download Now
-                </Button>
-              </Link>
+                </a>
+              </Button>
             </div>
           </div>
         </div>

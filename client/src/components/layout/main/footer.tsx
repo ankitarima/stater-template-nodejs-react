@@ -1,71 +1,66 @@
-import { Code, Github } from "lucide-react";
+import { Terminal, Github } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const REPO_URL = "https://github.com/ankitarima/stater-template-nodejs-react";
+
+const LINKS = [
+  { label: "Features", href: "#features" },
+  { label: "Why Use", href: "#why-use" },
+  { label: "Open Source", href: "#opensource" },
+  { label: "Get Started", href: "#get-started" },
+];
+
 export default function Footer() {
   return (
-    <footer className="py-12 border-t border-gray-800 bg-gray-950">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center gap-2 mb-4 md:mb-0">
-            <Code className="h-6 w-6 text-[#1D325C]" />
-            <span className="font-bold text-xl bg-gradient-to-r from-[#1D325C] to-purple-400 bg-clip-text text-transparent">
-              TS React+Node Starter
+    <footer className="border-t border-border/60 bg-background py-10">
+      <div className="mx-auto max-w-screen-xl px-4">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <Link to="/" className="flex items-center gap-2">
+            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <Terminal className="h-4 w-4" />
             </span>
-          </div>
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <Link
-              to="#features"
-              className="text-sm text-gray-400 hover:text-primary transition-colors"
-            >
-              Features
-            </Link>
-            <Link
-              to="#why-use"
-              className="text-sm text-gray-400 hover:text-primary transition-colors"
-            >
-              Why Use
-            </Link>
-            <Link
-              to="#opensource"
-              className="text-sm text-gray-400 hover:text-primary transition-colors"
-            >
-              Open Source
-            </Link>
-            <Link
-              to="#get-started"
-              className="text-sm text-gray-400 hover:text-primary transition-colors"
-            >
-              Get Started
-            </Link>
-            <Link
-              to="https://github.com/yourusername/ts-react-starter"
+            <span className="text-sm font-semibold">TS React+Node Starter</span>
+          </Link>
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {LINKS.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href={REPO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-primary transition-colors flex items-center gap-1"
+              className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               <Github className="h-4 w-4" />
               GitHub
-            </Link>
-          </div>
+            </a>
+          </nav>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+        <div className="mt-8 border-t border-border/60 pt-6 text-center text-xs text-muted-foreground">
           <p>
             © {new Date().getFullYear()} TS React+Node Starter. Released under
             the MIT License.
           </p>
-          <p>
+          <p className="mt-1">
             Made with{" "}
             <span role="img" aria-label="love">
               ❤️
             </span>{" "}
             by{" "}
-            <Link
-              to="https://github.com/ankitarima"
+            <a
+              href="https://github.com/ankitarima"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-gray-300 transition-colors underline"
+              className="font-medium text-foreground underline-offset-4 hover:underline"
             >
               ankitarima
-            </Link>
+            </a>
           </p>
         </div>
       </div>

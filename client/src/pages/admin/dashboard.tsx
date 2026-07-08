@@ -6,7 +6,7 @@ import data from "@/components/dashboard/data.json";
 export default function Dashboard() {
   return (
     <>
-      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+      <div className="flex flex-col gap-3 md:gap-4">
         <SectionCards />
         <ChartAreaInteractive />
         <DataTable data={data} />

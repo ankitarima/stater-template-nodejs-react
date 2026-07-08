@@ -19,17 +19,24 @@ import { useMutation } from "@tanstack/react-query";
 import fetchApi from "@/lib/axios";
 import Spinner from "../ui/spinner";
 
-const FormSchema = z.object({
-  email: z
-    .string()
-    .min(1, "Email is required")
-    .refine((value) => value.includes("@"), "Invalid email address"),
-  password: z.string().min(1, "Password is required"),
-});
+const FormSchema = z
+  .object({
+    name: z.string().min(2, "Name must be at least 2 characters"),
+    email: z
+      .string()
+      .min(1, "Email is required")
+      .refine((value) => value.includes("@"), "Invalid email address"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+    confirm_password: z.string().min(1, "Please confirm your password"),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: "Passwords do not match",
+    path: ["confirm_password"],
+  });
 
 type FormValues = z.infer<typeof FormSchema>;
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const { setUser } = useSession();
 
@@ -37,11 +44,12 @@ export default function Login() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { name: "", email: "", password: "", confirm_password: "" },
   });
 
   const mutation = useMutation({
-    mutationFn: (data: FormValues) => fetchApi.post(`/auth/login`, data),
+    mutationFn: ({ confirm_password: _confirm, ...data }: FormValues) =>
+      fetchApi.post(`/auth/register`, data),
   });
 
   const onSubmit = (data: FormValues) => {
@@ -63,10 +71,10 @@ export default function Login() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1.5">
-        <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
-        <p className="text-sm text-muted-foreground">
-          Sign in to your Acme Inc account
-        </p>
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Create your account
+        </h1>
+        <p className="text-sm text-muted-foreground">Get started with Acme Inc</p>
       </div>
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
@@ -75,6 +83,19 @@ export default function Login() {
                 <AlertDescription>{error_message}</AlertDescription>
               </Alert>
             )}
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Jane Doe" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"
@@ -93,15 +114,20 @@ export default function Login() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="flex items-center justify-between">
-                    Password
-                    <Link
-                      to="/auth/forgot-password"
-                      className="text-xs font-medium text-primary hover:underline"
-                    >
-                      Forgot password?
-                    </Link>
-                  </FormLabel>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="••••••••" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirm_password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm password</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="••••••••" {...field} />
                   </FormControl>
@@ -114,29 +140,15 @@ export default function Login() {
               className="w-full"
               disabled={mutation.isPending}
             >
-              Sign in <Spinner isLoading={mutation.isPending} />
-            </Button>
-            <div className="relative text-center text-xs after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-              <span className="relative z-10 bg-background px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
-            <Button variant="outline" className="w-full" type="button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                  d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-                  fill="currentColor"
-                />
-              </svg>
-              Sign in with Google
+              Create account <Spinner isLoading={mutation.isPending} />
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              Don&apos;t have an account?{" "}
+              Already have an account?{" "}
               <Link
-                to="/auth/register"
+                to="/auth/login"
                 className="font-medium text-primary hover:underline"
               >
-                Sign up
+                Sign in
               </Link>
             </p>
         </form>

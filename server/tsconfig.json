@@ -47,6 +47,6 @@
   "esbuild": {
     "target": "esnext"
   },
-  "exclude": ["node_modules", "public", "dist", "prisma"],
-  "include": ["**/*"]
+  "exclude": ["node_modules", "public", "dist", "prisma", "prisma.config.ts"],
+  "include": ["src/**/*"]
 }

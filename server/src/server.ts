@@ -25,8 +25,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Registering Index router
 app.use("/api/v1/", router);
 
-// Index route
-app.get("*", (_, res: Response) => {
+// SPA fallback (Express 5 requires a named wildcard, not a bare "*")
+app.get("/*splat", (_, res: Response) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 

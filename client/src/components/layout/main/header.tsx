@@ -1,117 +1,98 @@
-import { Github, Code } from "lucide-react";
+import { useState } from "react";
+import { Github, Terminal, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
+import { cn } from "@/lib/utils";
+
+const REPO_URL = "https://github.com/ankitarima/stater-template-nodejs-react";
+
+const NAV_LINKS = [
+  { label: "Features", href: "#features" },
+  { label: "Why Use", href: "#why-use" },
+  { label: "Open Source", href: "#opensource" },
+  { label: "Get Started", href: "#get-started" },
+];
+
 export default function Header() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="fixed w-full z-50 border-b border-gray-800 bg-gray-950/90 backdrop-blur-sm">
-      <nav className="py-2.5">
-        <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-          <Link to="/" className="flex items-center">
-            <Code className="h-6 w-6 mr-3 text-[#1D325C]" />
-            <span className="self-center text-xl font-semibold whitespace-nowrap bg-gradient-to-r from-[#1D325C] to-purple-400 bg-clip-text text-transparent">
-              TS React+Node
-            </span>
-          </Link>
-          <div className="flex items-center lg:order-2">
-            <div className="hidden mr-4 sm:inline-block">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
+      <nav className="mx-auto flex h-14 max-w-screen-xl items-center justify-between px-4">
+        <Link to="/" className="flex items-center gap-2">
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <Terminal className="h-4 w-4" />
+          </span>
+          <span className="text-sm font-semibold tracking-tight">
+            TS React+Node
+          </span>
+        </Link>
+
+        <ul className="hidden items-center gap-6 lg:flex">
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
               <Link
-                className="inline-flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded-md px-3 py-1.5 ring-1 ring-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
-                to="https://github.com/ankitarima/stater-template-nodejs-react"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Star on GitHub"
+                to={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
-                <Github className="h-4 w-4" />
-                Star
+                {link.label}
               </Link>
-            </div>
+            </li>
+          ))}
+        </ul>
 
-            <Link
-              to="https://github.com/ankitarima/stater-template-nodejs-react"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#1D325C] hover:bg-[#1D325C]/90 text-white focus:ring-4 focus:ring-primary/30 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 focus:outline-none"
-            >
-              Download
-            </Link>
-
-            <button
-              type="button"
-              className="inline-flex items-center p-2 ml-1 text-sm text-gray-400 rounded-lg lg:hidden hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-700"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-              onClick={() => {
-                const mobileMenu = document.getElementById("mobile-menu");
-                if (mobileMenu) {
-                  mobileMenu.classList.toggle("hidden");
-                }
-              }}
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-6 h-6"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
-          </div>
-          <div
-            className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
-            id="mobile-menu"
+        <div className="flex items-center gap-1.5">
+          <ModeToggle className="hidden sm:inline-flex" />
+          <Button asChild variant="ghost" size="icon" className="hidden sm:inline-flex">
+            <a href={REPO_URL} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Github className="h-4 w-4" />
+            </a>
+          </Button>
+          <Button asChild size="sm" className="hidden sm:inline-flex">
+            <Link to="/auth/login">Sign in</Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              <li>
-                <Link
-                  to="#"
-                  className="block py-2 pl-3 pr-4 text-gray-400 border-b border-gray-700 hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary lg:p-0 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                  aria-current="page"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#features"
-                  className="block py-2 pl-3 pr-4 text-gray-400 border-b border-gray-700 hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary lg:p-0 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#why-use"
-                  className="block py-2 pl-3 pr-4 text-gray-400 border-b border-gray-700 hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary lg:p-0 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Why Use
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#opensource"
-                  className="block py-2 pl-3 pr-4 text-gray-400 border-b border-gray-700 hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary lg:p-0 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Open Source
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="#get-started"
-                  className="block py-2 pl-3 pr-4 text-gray-400 border-b border-gray-700 hover:bg-gray-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary lg:p-0 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Get Started
-                </Link>
-              </li>
-            </ul>
-          </div>
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </Button>
         </div>
       </nav>
+
+      <div
+        className={cn(
+          "border-t border-border/60 lg:hidden",
+          open ? "block" : "hidden"
+        )}
+      >
+        <ul className="space-y-1 px-4 py-3">
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
+              <Link
+                to={link.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+          <li className="flex items-center gap-2 pt-2">
+            <Button asChild size="sm" className="flex-1">
+              <Link to="/auth/login" onClick={() => setOpen(false)}>
+                Sign in
+              </Link>
+            </Button>
+            <ModeToggle />
+          </li>
+        </ul>
+      </div>
     </header>
   );
 }
