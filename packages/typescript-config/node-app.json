@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node App",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "target": "ES2016",
+    "lib": ["ES2022"],
+    "module": "commonjs",
+    "moduleResolution": "node"
+  }
+}

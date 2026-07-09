@@ -1,0 +1,12 @@
+{
+  "name": "@workspace/typescript-config",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "files": [
+    "base.json",
+    "react-library.json",
+    "vite-app.json",
+    "node-app.json"
+  ]
+}
